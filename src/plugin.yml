@@ -1,0 +1,6 @@
+name: survivalBOT
+author: Niemand
+version: 1.0
+main: survival.labs.Main
+description: Discord Bot for Whitelist Management and more.
+api-version: 1.15

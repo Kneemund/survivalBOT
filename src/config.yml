@@ -1,0 +1,16 @@
+Bot:
+  Token: ''
+  LogChannelID: ''
+  WhitelistChannelID: ''
+  WhitelistRoleIDs:
+    - ''
+  Prefix: '!'
+  AutoResponseCooldown: 10000
+  Activity: 'on survivalLABS'
+  VerificationRoleID: ''
+MySQL:
+  Host: 'localhost'
+  Database: 'survivalBOT'
+  Username: ''
+  Password: ''
+  Port: '3306'
