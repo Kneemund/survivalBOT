@@ -41,10 +41,9 @@ public class Bot {
         this.db = db;
     }
 
-    public void startBot() {
+    public void startBot(FileConfiguration config) {
         Plugin plugin = Main.getPlugin(Main.class);
 
-        FileConfiguration config = plugin.getConfig();
         token = config.getString("Bot.Token");
         logChannelID = config.getString("Bot.LogChannelID");
         whitelistChannelID = config.getString("Bot.WhitelistChannelID");

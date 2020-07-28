@@ -24,7 +24,7 @@ public class JoinListener implements Listener {
 
         try {
             ResultSet results = db.query(db.sqlCountByUUID(uuid.toString()));
-            results.first();
+            results.next();
             if(results.getInt(1) == 0) event.disallow(PlayerLoginEvent.Result.KICK_WHITELIST, ChatColor.RED + "You are not whitelisted.");
             results.close();
         } catch (SQLException e) {

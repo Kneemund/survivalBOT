@@ -2,5 +2,18 @@ name: survivalBOT
 author: Niemand
 version: 1.0
 main: survival.labs.Main
-description: Discord Bot for Whitelist Management and more.
-api-version: 1.15
+description: A plugin for whitelist management via discord, utility commands and more.
+api-version: 1.16
+permissions:
+  survivallabs.utils.*:
+    description: All permissions of survivalLABS Utils.
+    children:
+      survivallabs.utils.map: true
+  survivallabs.utils.map:
+    default: true
+    description: Permission for using /map.
+commands:
+  map:
+    description: Sends the URL to the online map.
+    usage: /map
+    permission: survivallabs.utils.map

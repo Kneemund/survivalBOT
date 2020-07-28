@@ -9,17 +9,21 @@ public class Database {
 
     private Plugin plugin;
     private Connection connection;
-    public String host, database, username, password, port;
+    public String mode, host, database, username, password, port, path;
 
-    public void setup() {
+    public void setup(FileConfiguration config) {
         plugin = Main.getPlugin(Main.class);
-        FileConfiguration config = plugin.getConfig();
+        mode = config.getString("StorageMode").toLowerCase();
 
-        host = config.getString("MySQL.Host");
-        database = config.getString("MySQL.Database");
-        username = config.getString("MySQL.Username");
-        password = config.getString("MySQL.Password");
-        port = config.getString("MySQL.Port");
+        if(mode.equals("mysql")) {
+            host = config.getString("MySQL.Host");
+            database = config.getString("MySQL.Database");
+            username = config.getString("MySQL.Username");
+            password = config.getString("MySQL.Password");
+            port = config.getString("MySQL.Port");
+        } else {
+            path = config.getString("SQLite.Path");
+        }
 
         connect();
         update("CREATE TABLE IF NOT EXISTS registeredUsers" +
@@ -33,8 +37,14 @@ public class Database {
                 if (connection != null && !connection.isClosed()) return;
 
                 Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false", username, password);
-                plugin.getServer().getConsoleSender().sendMessage("[survivalBOT] Successfully connected to the MySQL database");
+
+                if(mode.equals("mysql")) {
+                    connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false", username, password);
+                } else {
+                    connection = DriverManager.getConnection("jdbc:sqlite:" + path + "accounts.db");
+                }
+
+                plugin.getServer().getConsoleSender().sendMessage("[survivalBOT] Successfully connected to the database.");
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

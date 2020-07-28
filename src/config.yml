@@ -8,6 +8,12 @@ Bot:
   AutoResponseCooldown: 10000
   Activity: 'on survivalLABS'
   VerificationRoleID: ''
+Commands:
+  MapURL: ''
+# MySQL or SQLite
+StorageMode: 'SQLite'
+SQLite:
+  Path: 'plugins/survivalBOT/'
 MySQL:
   Host: 'localhost'
   Database: 'survivalBOT'

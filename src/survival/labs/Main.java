@@ -1,8 +1,10 @@
 package survival.labs;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import survival.labs.bot.Bot;
 import survival.labs.spigot.events.JoinListener;
+import survival.labs.commands.MapCommand;
 
 public class Main extends JavaPlugin {
 
@@ -11,12 +13,15 @@ public class Main extends JavaPlugin {
 	
 	public void onEnable() {
 		loadConfig();
-		db.setup();
+		FileConfiguration config = getConfig();
+		db.setup(config);
 
 		getServer().getPluginManager().registerEvents(new JoinListener(db), this);
+		String mapURL = config.getString("Commands.MapURL");
+		getCommand("map").setExecutor(new MapCommand(mapURL));
 
 		bot = new Bot(db);
-		bot.startBot();
+		bot.startBot(config);
 	}
 	
 	public void onDisable() {

@@ -44,7 +44,7 @@ public class WhitelistCommand implements Command {
 
         try {
             ResultSet accountRegistrations = db.query(db.sqlSelectByUUID(uuid));
-            if(accountRegistrations.first()) accountRegisteredTo = accountRegistrations.getString("user_id");
+            if(accountRegistrations.next()) accountRegisteredTo = accountRegistrations.getString("user_id");
             accountRegistrations.close();
 
             if(accountRegisteredTo != null) {
@@ -53,7 +53,7 @@ public class WhitelistCommand implements Command {
             }
 
             ResultSet registeredAccounts = db.query(db.sqlCountByUserID(userID));
-            if(registeredAccounts.first()) mcAccounts = registeredAccounts.getInt(1);
+            if(registeredAccounts.next()) mcAccounts = registeredAccounts.getInt(1);
             registeredAccounts.close();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -61,7 +61,7 @@ public class RemoveCommand implements Command {
 
         try {
             ResultSet registeredAccounts = db.query(db.sqlCountByUserID(userID));
-            if(registeredAccounts.first()) {
+            if(registeredAccounts.next()) {
                 if(registeredAccounts.getInt(1) == 0) event.getGuild().removeRoleFromMember(userID, event.getGuild().getRoleById(bot.verificationRoleID)).queue();
             }
         } catch (SQLException e) {
