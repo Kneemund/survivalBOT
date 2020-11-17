@@ -1,12 +1,10 @@
 package survival.labs.bot;
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Role;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -61,7 +59,7 @@ public class Bot {
         }
 
         try {
-            jda = new JDABuilder(AccountType.BOT).setToken(token).setActivity(Activity.playing(config.getString("Bot.Activity"))).build();
+            jda = JDABuilder.createDefault(token).setActivity(Activity.playing(config.getString("Bot.Activity"))).build();
 
             jda.addEventListener(new GuildMemberLeave(this, db));
             jda.addEventListener(new GuildMessageReceived(this, db, waiter, plugin));

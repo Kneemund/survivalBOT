@@ -1,6 +1,5 @@
 package survival.labs.bot.events.commands;
 
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import survival.labs.bot.Bot;

@@ -1,6 +1,7 @@
 package survival.labs.bot.events;
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
+import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.bukkit.plugin.Plugin;
@@ -10,15 +11,20 @@ import survival.labs.bot.Bot;
 import survival.labs.bot.CommandHandler;
 import survival.labs.bot.events.commands.*;
 
+import javax.annotation.Nonnull;
+
+
 public class GuildMessageReceived extends ListenerAdapter {
 
     private final Bot bot;
+    private final Plugin plugin;
 
     private final AutoResponseHandler autoResponseHandler;
     private final CommandHandler handler;
 
     public GuildMessageReceived(Bot bot, Database db, EventWaiter waiter, Plugin plugin) {
         this.bot = bot;
+        this.plugin = plugin;
 
         autoResponseHandler = new AutoResponseHandler();
 
@@ -34,7 +40,12 @@ public class GuildMessageReceived extends ListenerAdapter {
     }
 
     @Override
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+    public void onReady(@Nonnull ReadyEvent event) {
+        plugin.getLogger().info("Successfully logged in.");
+    }
+
+    @Override
+    public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         if (event.getAuthor().isBot() || event.isWebhookMessage()) return;
 
         if(event.getMessage().getContentRaw().startsWith(bot.prefix)) {

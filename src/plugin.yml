@@ -1,6 +1,6 @@
 name: survivalBOT
 author: Niemand
-version: 1.0
+version: 1.1
 main: survival.labs.Main
 description: A plugin for whitelist management via discord, utility commands and more.
 api-version: 1.16

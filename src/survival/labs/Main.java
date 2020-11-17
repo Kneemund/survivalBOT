@@ -3,8 +3,8 @@ package survival.labs;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import survival.labs.bot.Bot;
-import survival.labs.spigot.events.JoinListener;
 import survival.labs.commands.MapCommand;
+import survival.labs.spigot.events.JoinListener;
 
 public class Main extends JavaPlugin {
 

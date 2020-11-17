@@ -44,7 +44,7 @@ public class Database {
                     connection = DriverManager.getConnection("jdbc:sqlite:" + path + "accounts.db");
                 }
 
-                plugin.getServer().getConsoleSender().sendMessage("[survivalBOT] Successfully connected to the database.");
+                plugin.getLogger().info("Successfully connected to the database.");
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
